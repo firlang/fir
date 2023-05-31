@@ -1,5 +1,4 @@
 <div align="center">
-    <span style="font-size: 600%;">🌲</span>
     <h1>The Fir Programming language</h1>
     <a href="https://firlang.vercel.app">firlang.vercel.app</a><br/>
     <br/>
