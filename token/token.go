@@ -13,6 +13,7 @@ const (
 	ASSIGN = "ASSIGN"
 
 	NUMBER = "NUMBER"
+	IDENT  = "IDENT"
 
 	EOF = "EOF"
 )

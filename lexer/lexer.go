@@ -51,6 +51,8 @@ func (l *Lexer) Scan_tokens() []token.Token {
 		default:
 			if l.is_digit(c) {
 				l.number()
+			} else if l.is_alpha(c) {
+				l.ident()
 			} else {
 				if c != " " {
 					l.illegal(c)
@@ -101,6 +103,12 @@ func (l *Lexer) is_digit(c string) bool {
 	return c >= "0" && c <= "9"
 }
 
+func (l *Lexer) is_alpha(c string) bool {
+	return (c >= "a" && c <= "z") ||
+		(c >= "A" && c <= "Z") ||
+		c == "_"
+}
+
 func (l *Lexer) number() {
 	buf := []string{}
 
@@ -114,4 +122,20 @@ func (l *Lexer) number() {
 	}
 
 	l.add_token(token.NUMBER, strings.Join(buf, ""))
+}
+
+func (l *Lexer) ident() {
+	buf := []string{}
+
+	for l.is_alpha(l.peek()) {
+		buf = append(buf, string(l.source[l.char]))
+		if l.is_alpha(l.peek_next()) {
+			l.advance()
+		} else {
+			break
+		}
+	}
+
+	ident := strings.Join(buf, "")
+	l.add_token(token.IDENT, ident)
 }

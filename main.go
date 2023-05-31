@@ -2,13 +2,19 @@ package main
 
 import (
 	"fir/lexer"
+	"fir/repl"
 	"fmt"
 	"os"
 )
 
 func main() {
-	if len(os.Args) == 2 {
+	switch len(os.Args) {
+	case 1:
+		repl.Repl()
+	case 2:
 		run_file(os.Args[1])
+	default:
+		println("usage: fir <file>")
 	}
 }
 
