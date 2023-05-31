@@ -20,7 +20,7 @@
         - [x] Integers
         - [ ] Floating-points
     - [ ] Strings
-    - [ ] Idents
+    - [x] Idents
 - [ ] Parsing
 - [ ] Eval
 
