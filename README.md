@@ -11,15 +11,15 @@
 (well, not yet. Fir is under heavy development and is right now just a lexer! Hopefully, it'll be in a usable state soon enough though!)
 
 ## Todo
-- [] Lexing
+- [ ] Lexing
     - [x] Basic operators (+, -, *, /)
     - [x] Assignment (:=)
     - Numbers
         - [x] Integers
-        - [] Floating-points
-    - [] Strings
-    - [] Idents
-- [] Parsing
-- [] Eval
+        - [ ] Floating-points
+    - [ ] Strings
+    - [ ] Idents
+- [ ] Parsing
+- [ ] Eval
 
 ## Getting Started
