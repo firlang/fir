@@ -11,6 +11,10 @@ const (
 	COLON = "COLON"
 
 	ASSIGN = "ASSIGN"
+
+	NUMBER = "NUMBER"
+
+	EOF = "EOF"
 )
 
 type Token struct {

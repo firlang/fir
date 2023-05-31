@@ -4,6 +4,7 @@ import (
 	"fir/error"
 	"fir/token"
 	"fmt"
+	"strings"
 )
 
 type Lexer struct {
@@ -23,6 +24,7 @@ func New(source string) Lexer {
 
 func (l *Lexer) Scan_tokens() []token.Token {
 	c := ""
+
 	for !l.at_end() {
 		c = string(l.source[l.char])
 		switch c {
@@ -30,6 +32,10 @@ func (l *Lexer) Scan_tokens() []token.Token {
 			l.add_token(token.PLUS, "+")
 		case "-":
 			l.add_token(token.MINUS, "-")
+		case "*":
+			l.add_token(token.STAR, "*")
+		case "/":
+			l.add_token(token.SLASH, "/")
 
 		case ":":
 			if l.peek_next() == "=" {
@@ -43,10 +49,17 @@ func (l *Lexer) Scan_tokens() []token.Token {
 			l.line++
 
 		default:
-			l.add_token(c, c)
+			if l.is_digit(c) {
+				l.number()
+			} else {
+				if c != " " {
+					l.illegal(c)
+				}
+			}
 		}
 		l.advance()
 	}
+	l.add_token(token.EOF, "")
 	return l.tokens
 }
 
@@ -62,6 +75,7 @@ func (l *Lexer) add_token(tok string, c string) {
 	l.tokens = append(l.tokens, token.Token{
 		Type:    tok,
 		Literal: c,
+		Line:    l.line,
 	})
 }
 
@@ -72,6 +86,32 @@ func (l *Lexer) peek_next() string {
 	return string(l.source[l.char+1])
 }
 
+func (l *Lexer) peek() string {
+	if l.char == len(l.source) {
+		return ""
+	}
+	return string(l.source[l.char])
+}
+
 func (l *Lexer) illegal(c string) {
 	error.Error(error.LexError, fmt.Sprintf("illegal token '%s'", c), l.line)
+}
+
+func (l *Lexer) is_digit(c string) bool {
+	return c >= "0" && c <= "9"
+}
+
+func (l *Lexer) number() {
+	buf := []string{}
+
+	for l.is_digit(l.peek()) {
+		buf = append(buf, string(l.source[l.char]))
+		if l.is_digit(l.peek_next()) {
+			l.advance()
+		} else {
+			break
+		}
+	}
+
+	l.add_token(token.NUMBER, strings.Join(buf, ""))
 }
