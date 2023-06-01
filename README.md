@@ -21,11 +21,12 @@
 - [ ] Lexing
     - [x] Basic operators (+, -, *, /)
     - [x] Assignment (:=)
-    - Numbers
+    - [ ] Numbers
         - [x] Integers
         - [ ] Floating-points
     - [ ] Strings
     - [x] Idents
+    - [ ] Keywords
 - [ ] Parsing
 - [ ] Eval
 
