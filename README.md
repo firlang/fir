@@ -12,6 +12,11 @@
 
 (well, not yet. Fir is under heavy development and is right now just a lexer! Hopefully, it'll be in a usable state soon enough though!)
 
+* [Todo](#todo)
+* [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Building from source](#building-from-source)
+
 ## Todo
 - [ ] Lexing
     - [x] Basic operators (+, -, *, /)
@@ -25,3 +30,15 @@
 - [ ] Eval
 
 ## Getting Started
+
+### Prerequisites
+* Go >1.20
+* Make
+
+
+### Building from source
+1. Clone the latest version of the repo from Github
+    - gh: `gh repo clone firlang/fir`
+
+    - git: `git clone https://github.com/firlang/fir`
+2. Build the project by running `make` (the executable will be in `debug`)
