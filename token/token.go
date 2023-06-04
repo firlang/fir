@@ -3,10 +3,14 @@ package token
 import "fmt"
 
 const (
-	PLUS  = "PLUS"
-	MINUS = "MINUS"
-	STAR  = "STAR"
-	SLASH = "SLASH"
+	PLUS      = "PLUS"
+	MINUS     = "MINUS"
+	STAR      = "STAR"
+	SLASH     = "SLASH"
+	CARET     = "CARET"
+	LPAREN    = "LPAREN"
+	RPAREN    = "RPAREN"
+	SEMICOLON = "SEMICOLON"
 
 	COLON = "COLON"
 
@@ -14,6 +18,10 @@ const (
 
 	NUMBER = "NUMBER"
 	IDENT  = "IDENT"
+	STRING = "STRING"
+
+	TRUE  = "TRUE"
+	FALSE = "FALSE"
 
 	EOF = "EOF"
 )

@@ -11,6 +11,11 @@ import (
 func Repl() {
 
 	reader := bufio.NewReader(os.Stdin)
+	fmt.Println(`  __ _       | firlang v0.1
+ / _(_)_ _   | https://firlang.vercel.app/
+|  _| | '_|  |
+|_| |_|_|    | press 'Ctrl+C' to exit
+			  `)
 
 	for {
 		fmt.Print(">>> ")
