@@ -134,6 +134,20 @@ func (l *Lexer) number() {
 		}
 	}
 
+	if l.peek_next() == "." {
+		buf = append(buf, ".")
+		l.advance()
+		l.advance()
+		for l.is_digit(l.peek()) {
+			buf = append(buf, string(l.source[l.char]))
+			if l.is_digit(l.peek_next()) {
+				l.advance()
+			} else {
+				break
+			}
+		}
+	}
+
 	l.add_token(token.NUMBER, strings.Join(buf, ""))
 }
 

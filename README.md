@@ -23,7 +23,7 @@
     - [x] Assignment (:=)
     - [ ] Numbers
         - [x] Integers
-        - [ ] Floating-points
+        - [x] Floating-points
     - [ ] Strings
     - [x] Idents
     - [ ] Keywords
