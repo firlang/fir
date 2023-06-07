@@ -24,7 +24,7 @@
     - [ ] Numbers
         - [x] Integers
         - [x] Floating-points
-    - [ ] Strings
+    - [x] Strings
     - [x] Idents
     - [ ] Keywords
 - [ ] Parsing
