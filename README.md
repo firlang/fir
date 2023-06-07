@@ -21,7 +21,7 @@
 - [ ] Lexing
     - [x] Basic operators (+, -, *, /)
     - [x] Assignment (:=)
-    - [ ] Numbers
+    - [x] Numbers
         - [x] Integers
         - [x] Floating-points
     - [x] Strings
