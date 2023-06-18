@@ -24,8 +24,11 @@ func Repl() {
 		text = strings.Replace(text, "\n", "", -1)
 
 		l := lexer.New(text)
-		for _, tok := range l.Scan_tokens() {
-			fmt.Println(tok.String())
+		tokens, e := l.Scan_tokens()
+		if !e {
+			for _, tok := range tokens {
+				fmt.Println(tok.String())
+			}
 		}
 	}
 }

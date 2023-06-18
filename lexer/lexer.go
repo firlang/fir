@@ -8,21 +8,23 @@ import (
 )
 
 type Lexer struct {
-	source string
-	char   int
-	tokens []token.Token
-	line   int
+	source    string
+	char      int
+	tokens    []token.Token
+	line      int
+	had_error bool
 }
 
 func New(source string) Lexer {
 	return Lexer{
-		source: source,
-		char:   0,
-		line:   1,
+		source:    source,
+		char:      0,
+		line:      1,
+		had_error: false,
 	}
 }
 
-func (l *Lexer) Scan_tokens() []token.Token {
+func (l *Lexer) Scan_tokens() ([]token.Token, bool) {
 	c := ""
 
 	for !l.at_end() {
@@ -36,8 +38,32 @@ func (l *Lexer) Scan_tokens() []token.Token {
 			l.add_token(token.STAR, "*")
 		case "/":
 			l.add_token(token.SLASH, "/")
+		case "%":
+			l.add_token(token.MODULO, "%")
 		case "^":
 			l.add_token(token.CARET, "^")
+		case ".":
+			l.add_token(token.DOT, ".")
+		case "=":
+			if l.peek_next() == "=" {
+				l.add_token(token.EQUALTO, "==")
+				l.advance()
+			}
+		case ">":
+			if l.peek_next() == "=" {
+				l.add_token(token.GTEQUALTO, ">=")
+				l.advance()
+			}
+		case "<":
+			if l.peek_next() == "=" {
+				l.add_token(token.LTEQUALTO, "<=")
+				l.advance()
+			}
+		case "&":
+			if l.peek_next() == "&" {
+				l.add_token(token.AND, "&&")
+				l.advance()
+			}
 
 		case "\"":
 			l.string()
@@ -46,6 +72,10 @@ func (l *Lexer) Scan_tokens() []token.Token {
 			l.add_token(token.LPAREN, "(")
 		case ")":
 			l.add_token(token.RPAREN, ")")
+		case "{":
+			l.add_token(token.LBRACE, "{")
+		case "}":
+			l.add_token(token.RBRACE, "}")
 
 		case ";":
 			l.add_token(token.SEMICOLON, ";")
@@ -57,6 +87,8 @@ func (l *Lexer) Scan_tokens() []token.Token {
 			} else {
 				l.illegal(":")
 			}
+		case ",":
+			l.add_token(token.COMMA, ",")
 
 		case "\n":
 			l.line++
@@ -75,7 +107,7 @@ func (l *Lexer) Scan_tokens() []token.Token {
 		l.advance()
 	}
 	l.add_token(token.EOF, "")
-	return l.tokens
+	return l.tokens, l.had_error
 }
 
 func (l *Lexer) advance() {
@@ -110,6 +142,7 @@ func (l *Lexer) peek() string {
 
 func (l *Lexer) illegal(c string) {
 	error.Error(error.LexError, fmt.Sprintf("illegal token '%s'", c), l.line, strings.Split(l.source, "\n")[l.line-1])
+	l.had_error = true
 }
 
 func (l *Lexer) is_digit(c string) bool {
@@ -166,6 +199,7 @@ func (l *Lexer) string() {
 
 		} else {
 			error.Error(error.LexError, "unterminated string", l.line, strings.Split(l.source, "\n")[l.line-1])
+			l.had_error = true
 			break
 		}
 	}
@@ -191,6 +225,10 @@ func (l *Lexer) ident() {
 		l.add_token(token.TRUE, "true")
 	case "false":
 		l.add_token(token.FALSE, "false")
+	case "fn":
+		l.add_token(token.FN, "fn")
+	case "if":
+		l.add_token(token.IF, "if")
 	default:
 		l.add_token(token.IDENT, ident)
 	}

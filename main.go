@@ -26,8 +26,11 @@ func run_file(source string) {
 	}
 
 	l := lexer.New(string(f))
-
-	for _, tok := range l.Scan_tokens() {
+	tokens, e := l.Scan_tokens()
+	if e {
+		os.Exit(1)
+	}
+	for _, tok := range tokens {
 		fmt.Println(tok.String())
 	}
 }

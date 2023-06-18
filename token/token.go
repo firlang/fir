@@ -7,14 +7,23 @@ const (
 	MINUS     = "MINUS"
 	STAR      = "STAR"
 	SLASH     = "SLASH"
+	MODULO    = "MODULO"
 	CARET     = "CARET"
 	LPAREN    = "LPAREN"
 	RPAREN    = "RPAREN"
+	LBRACE    = "LBRACE"
+	RBRACE    = "RBRACE"
 	SEMICOLON = "SEMICOLON"
 
 	COLON = "COLON"
+	DOT   = "DOT"
+	COMMA = "COMMA"
 
-	ASSIGN = "ASSIGN"
+	ASSIGN    = "ASSIGN"
+	EQUALTO   = "EQUALTO"
+	GTEQUALTO = "GTEQUALTO"
+	LTEQUALTO = "LTEQUALTO"
+	AND       = "AND"
 
 	NUMBER = "NUMBER"
 	IDENT  = "IDENT"
@@ -22,6 +31,8 @@ const (
 
 	TRUE  = "TRUE"
 	FALSE = "FALSE"
+	FN    = "FN"
+	IF    = "IF"
 
 	EOF = "EOF"
 )
